@@ -1,6 +1,15 @@
-  <header>
-    <h1>Eat-A-Burger!!(kind of)</h1>
-  </header>
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1>Eat-A-Burger!!(kind of)</h1>
+          <div>
+            <img src="/assets/img/burger.png" width="200" height="200" alt="Burger Image">
+          </div>
+      </div>
+    </div>
+  </div>
+</header> 
   <div class="container">
     <div class="row">
       <!--begin new burger side-->
@@ -9,7 +18,7 @@
         {{#each burgers}}
           {{#unless devoured}}
           <form action="burger/eat/{{id}}" method="POST">
-            <div class="input-group">
+            <div class="input-group w-75">
               <ul class="form-control">{{id}}. {{burger_name}}</ul>
                 <span class="input-group-button">
                   <button class="btn btn-success devour-button" type="submit">Devour It!</button>
@@ -26,7 +35,7 @@
         <div id="already-eaten">
         {{#each burgers}}
           {{#if this.devoured}}
-            <div class="input-group">
+            <div class="input-group w-75">
               <ul class="form-control">{{this.id}}. {{this.burger_name}}</ul>
             </div>
           {{/if}}
@@ -39,7 +48,7 @@
   <!--New burger form-->
   <div class="container">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-lg-4 offset-lg-4">
         <div>
           <form action="burger/create" method="POST">
             <div class="form-group">
