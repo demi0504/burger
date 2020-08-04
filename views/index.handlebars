@@ -4,8 +4,20 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
-        <p>Placeholder for Burger Not Eaten</p>
-      </div>
+
+        {{#each burgers}}
+          {{#unless devoured}}
+          <form action="burger/eat/{{id}}" method="POST">
+            <div class="input-group">
+              <li class="form-control">{{id}}. {{burger_name}}</li>
+                <span class="input-group-button">
+                  <button class="btn btn-success devour-button" type="submit">Devour It!</button>
+                </span>
+            </div>
+          </form>
+          {{/unless}}
+        {{/each}}
+
       <div class="col-sm-6">
         <p>Placeholder for Burger Eaten</p>
       </div>
