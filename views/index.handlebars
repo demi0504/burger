@@ -3,8 +3,9 @@
   </header>
   <div class="container">
     <div class="row">
+      <!--begin new burger side-->
       <div class="col-sm-6">
-
+        <div id="fresh-burger">
         {{#each burgers}}
           {{#unless devoured}}
           <form action="burger/eat/{{id}}" method="POST">
@@ -17,10 +18,21 @@
           </form>
           {{/unless}}
         {{/each}}
-
+        </div>
+      <!--end new burger side-->
+      <!--begin eaten burger column-->
       <div class="col-sm-6">
-        <p>Placeholder for Burger Eaten</p>
+        <div id="already-eaten">
+        {{#each burgers}}
+          {{#if this.devoured}}
+            <div class="input-group">
+              <li class="form-control">{{this.id}}. {{this.burger_name}}</li>
+            </div>
+          {{/if}}
+        {{/each}}
+        </div>
       </div>
+      <!--end eaten burger column-->
     </div>
   </div>
 
