@@ -10,7 +10,7 @@
           {{#unless devoured}}
           <form action="burger/eat/{{id}}" method="POST">
             <div class="input-group">
-              <li class="form-control">{{id}}. {{burger_name}}</li>
+              <ul class="form-control">{{id}}. {{burger_name}}</ul>
                 <span class="input-group-button">
                   <button class="btn btn-success devour-button" type="submit">Devour It!</button>
                 </span>
@@ -19,6 +19,7 @@
           {{/unless}}
         {{/each}}
         </div>
+      </div>
       <!--end new burger side-->
       <!--begin eaten burger column-->
       <div class="col-sm-6">
@@ -26,7 +27,7 @@
         {{#each burgers}}
           {{#if this.devoured}}
             <div class="input-group">
-              <li class="form-control">{{this.id}}. {{this.burger_name}}</li>
+              <ul class="form-control">{{this.id}}. {{this.burger_name}}</ul>
             </div>
           {{/if}}
         {{/each}}
@@ -35,17 +36,17 @@
       <!--end eaten burger column-->
     </div>
   </div>
-
+  <!--New burger form-->
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
         <div>
-          <form action="">
+          <form action="burger/create" method="POST">
             <div class="form-group">
-              <label for="exampleInputBurger">Enter Burger Name Here!</label>
-              <input type="burger" class="form-control">
+              <label for="new_burger">Enter Burger Name Here!</label>
+              <input type="burger" class="form-control" name="burger_name">
             </div>
-            <button type="submit" class="burgerNotEaten">Submit</button>
+            <button type="submit" class="btn btn-danger">Submit</button>
           </form>
         </div>
       </div>
