@@ -1,12 +1,5 @@
 var connection = require("../config/connection.js");
 
-// connection.connect(function(err) {
-//   if (err) {
-//     console.error('error connecting: ' + err.stack);
-//     return;
-//   };
-//   console.log('connected as id ' + connection.threadId);
-// });
 
 //selectAll, insertOne, updateOne orm functions
 var orm = {
@@ -26,10 +19,13 @@ var orm = {
     });
   },
   // updateone to devoured
-  updateOne: function(burgerID, cb) {
-    connection.query('UPDATE burgers SET ? WHERE ?', [{devoured: true}, {id: burgerID}], function(err, result) {
-      if(err) throw err;
-      cb(result);
+  updateOne: function (tableName, updatedDataObject, id, cb) {
+    var queryString = 'UPDATE ?? SET ? WHERE id = ?'
+
+    connection.query(queryString, [tableName, updatedDataObject, id], function (err, result) {
+        if (err) throw err;
+            // console.log(result);
+        cb(result);
     });
   }
 };

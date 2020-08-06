@@ -12,21 +12,21 @@ router.get("/index", function(req, res) {
       burgers: data
     };
       //console.log(hbsObject);
-     res.render("index", hbsObject);
+     res.render("index", { burgers: data });
   });
 });
 
 //create a new burger
 router.post("/burger/create", function(req, res) {
-  burger.insertOne(req.body.burger_name, function() {
+  burger.insertOne(req.body, function(data) {
     res.redirect('/index');
   });
 });
 
 //devour a burger
-router.post("/burgers/eat/:id", function(req, res) {    
-  burger.updateOne(req.params.id, function() {
-    res.redirect('/index');
+router.put("/burgers/:id", function(req, res) {    
+  burger.updateOne({ devoured: 1 }, req.params.id, function(data) {
+    res.sendStatus(200);
   });
 });
 
