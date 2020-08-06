@@ -3,18 +3,18 @@ var connection = require("../config/connection.js");
 
 //selectAll, insertOne, updateOne orm functions
 var orm = {
-  selectAll: function(cb) {
-    connection.query("SELECT * FROM burgers;", function(err, result) {
+  selectAll: function(tableName, cb) {
+    var queryString = "SELECT * FROM ??";
+
+    connection.query(queryString, [tableName], function (err, result) {
       if (err) throw err;
       cb(result);
-        });
+      });
   },
-  insertOne: function(burger_name, cb) {
-    connection.query('INSERT INTO burgers SET ?', {
-      burger_name: burger_name,
-      devoured: false
-    }, function(err, result) {
-       if (err) throw err;
+  insertOne: function(tableName, newDataObject, cb) {
+    var queryString = 'INSERT INTO ?? SET ?';
+    connection.query(queryString, [tableName, newDataObject], function (err, result) {
+      if (err) throw err;
       cb(result);
     });
   },

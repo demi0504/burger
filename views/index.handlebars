@@ -16,10 +16,10 @@
       <div class="col-sm-6">
         <div id="fresh-burger">
         {{#each burgers}}
-          {{#unless devoured}}
-          <form action="burger/eat/{{id}}" method="PUT">
+          {{#unless this.devoured}}
+          <form>
             <div class="input-group w-75">
-              <ul class="form-control">{{id}}. {{burger_name}}</ul>
+              <ul class="form-control">{{this.id}}. {{this.burger_name}}</ul>
                 <span class="input-group-button">
                   <button class="btn btn-success devour-button" type="submit">Devour It!</button>
                 </span>

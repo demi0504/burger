@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var burger = require("../models/burger.js");
+var burger = require("../models/burger");
 
 router.get('/', function(req, res) {
   res.redirect('/index');
@@ -8,16 +8,12 @@ router.get('/', function(req, res) {
 
 router.get("/index", function(req, res) {
   burger.selectAll(function(data) {
-    var hbsObject = {
-      burgers: data
-    };
-      //console.log(hbsObject);
      res.render("index", { burgers: data });
   });
 });
 
 //create a new burger
-router.post("/burger/create", function(req, res) {
+router.post("/burger/insert", function(req, res) {
   burger.insertOne(req.body, function(data) {
     res.redirect('/index');
   });
