@@ -1,32 +1,64 @@
 var connection = require("../config/connection.js");
 
+function objToSql(ob) {
+  var arr = [];
 
+  // loop through the keys and push the key/value as a string into arr
+  for (var key in ob) {
+      var value = ob[key];
+      // check to skip hidden properties
+      if (Object.hasOwnProperty.call(ob, key)) {
+          // if string with spaces, add quotations (Cheesy Western => 'Cheesy Western')
+          if (typeof value === "string" && value.indexOf(" ") >= 0) {
+              value = "'" + value + "'";
+          }
+          
+          arr.push(key + "=" + value);
+      }
+  }
+
+  // translate array of strings to a single comma-separated string
+  return arr.toString();
+}
 //selectAll, insertOne, updateOne orm functions
 var orm = {
-  selectAll: function(tableName, cb) {
-    var queryString = "SELECT * FROM ??";
-
-    connection.query(queryString, [tableName], function (err, result) {
-      if (err) throw err;
-      cb(result);
-    });
+  selectAll: function(table, callback){
+      var queryString = "SELECT * FROM " + table + ";"
+      connection.query(queryString, function(err, result) {
+          if (err) throw err;
+          callback(result);
+      });
   },
-  insertOne: function(burger, cb) {
-    var queryString = 'INSERT INTO burgers (burger_name) VALUES (?)';
-    connection.query(queryString, [burger], function (err, result) {
-      if (err) throw err;
-      cb(result);
-    });
-  },
-  // updateone to devoured
-  updateOne: function (id, cb) {
-    var queryString = 'UPDATE burgers SET devoured = true WHERE id = ?'
+  insertOne: function(table, cols, values, callback){
+      var queryString = "INSERT INTO " + table;
+      queryString += " (";
+      queryString += cols.toString();
+      queryString += ") ";
+      queryString += "VALUES (?";
+      queryString += ") ";
 
-    connection.query(queryString, [id], function (err, result) {
-        if (err) throw err;
-            // console.log(result);
-        cb(result);
-    });
-  }
-};
+      connection.query(queryString, values, function(err, result) {
+          if (err) {
+              throw err;
+          }
+          callback(result);
+      });
+  },
+  updateOne: function(table, objColVals, condition, callback) {
+      console.log(objColVals)
+      var queryString = "UPDATE " + table;
+      queryString += " SET ";
+      queryString += objToSql(objColVals);
+      queryString += " WHERE ";
+      queryString += condition;
+
+      console.log(queryString);
+      connection.query(queryString, function(err, result) {
+          if (err) {
+              throw err;
+          }
+          callback(result);
+      });
+  },
+}
 module.exports = orm;

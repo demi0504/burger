@@ -16,15 +16,11 @@
       <div class="col-sm-6">
         <div id="fresh-burger">
         {{#each burgers}}
-          {{#unless this.devoured}}
-          <form>
-            <div class="input-group w-75">
-              <ul class="form-control">{{this.id}}. {{this.burger_name}}</ul>
-                <span class="input-group-button">
-                  <button class="btn btn-success devour-button" type="submit">Devour It!</button>
-                </span>
-            </div>
-          </form>
+          {{#unless devoured}}
+          <ul>
+            <p>{{burger_name}}</p>
+            <button class="devour" data-id="{{id}}">Devour Me!</button>
+          </ul>
           {{/unless}}
         {{/each}}
         </div>
@@ -34,9 +30,9 @@
       <div class="col-sm-6">
         <div id="already-eaten">
         {{#each burgers}}
-          {{#if this.devoured}}
+          {{#if devoured}}
             <div class="input-group w-75">
-              <ul class="form-control">{{this.id}}. {{this.burger_name}}</ul>
+              <ul class="form-control">{{burger_name}}</ul>
             </div>
           {{/if}}
         {{/each}}
@@ -50,10 +46,10 @@
     <div class="row">
       <div class="col-lg-4 offset-lg-4">
         <div>
-          <form action="burger/create" method="POST">
+          <form class="create-burger-form">
             <div class="form-group">
               <label for="new_burger">Enter Burger Name Here!</label>
-              <input type="burger" class="form-control" name="burger_name">
+              <input type="text" id="createBurger">
             </div>
             <button type="submit" class="btn btn-danger">Submit</button>
           </form>
