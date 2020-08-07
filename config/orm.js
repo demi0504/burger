@@ -9,20 +9,20 @@ var orm = {
     connection.query(queryString, [tableName], function (err, result) {
       if (err) throw err;
       cb(result);
-      });
+    });
   },
-  insertOne: function(tableName, newDataObject, cb) {
-    var queryString = 'INSERT INTO ?? SET ?';
-    connection.query(queryString, [tableName, newDataObject], function (err, result) {
+  insertOne: function(burger, cb) {
+    var queryString = 'INSERT INTO burgers (burger_name) VALUES (?)';
+    connection.query(queryString, [burger], function (err, result) {
       if (err) throw err;
       cb(result);
     });
   },
   // updateone to devoured
-  updateOne: function (tableName, updatedDataObject, id, cb) {
-    var queryString = 'UPDATE ?? SET ? WHERE id = ?'
+  updateOne: function (id, cb) {
+    var queryString = 'UPDATE burgers SET devoured = true WHERE id = ?'
 
-    connection.query(queryString, [tableName, updatedDataObject, id], function (err, result) {
+    connection.query(queryString, [id], function (err, result) {
         if (err) throw err;
             // console.log(result);
         cb(result);
