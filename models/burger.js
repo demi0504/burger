@@ -4,11 +4,15 @@ var burger = {
     selectAll: function(cb) {
       orm.selectAll("burgers", cb)
     },
-    insertOne: function(newDataObject, cb) {
-      orm.insertOne("burgers", newDataObject, cb);
+    insertOne: function(burger, cb) {
+      orm.insertOne(burger, function(res) {
+        cb(res);
+      });
     },
-    updateOne: function(updatedDataObject, id, cb) {
-      orm.updateOne("burgers", updatedDataObject, id, cb);
+    updateOne: function(id, cb) {
+      orm.updateOne([id], function(res) {
+        cb(res);
+      });
     }
   };
 
