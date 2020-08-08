@@ -3,8 +3,25 @@ body {
     text-align: center;
 }
 
+.btn-success {
+    float: right;
+    margin-left: 150px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 .container {
     margin-bottom: 20px;
     margin-top: 20px;
 }
 
+.no-bullet {
+    background-color: white;
+    outline: grey;
+    list-style-type: none;
+    text-align: center;
+}

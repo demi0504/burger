@@ -14,13 +14,14 @@
     <div class="row">
       <!--begin new burger side-->
       <div class="col-sm-6">
-        <div id="fresh-burger">
+        <div class="clearfix" id="fresh-burger">
         {{#each burgers}}
           {{#unless devoured}}
-          <ul>
-            <p>{{burger_name}}</p>
-            <button class="devour" data-id="{{id}}">Devour Me!</button>
-          </ul>
+            <ul class="form-control">
+              <li class="no-bullet">{{burger_name}}
+              <button class="btn btn-success devour" data-id="{{id}}">Devour Me!</button>
+              </li>
+            </ul>
           {{/unless}}
         {{/each}}
         </div>
