@@ -1,11 +1,11 @@
-var express = require('express');
-var router = express.Router();
-var burger = require("../models/burger.js");
+const express = require('express');
+const router = express.Router();
+const burger = require("../models/burger.js");
 
 //GET request to grab database contents
 router.get("/", (req, res) => {
   burger.selectAll(data => {
-      var hbsObject = {
+      const hbsObject = {
           burgers: data
       };
       res.render("index", hbsObject);
@@ -24,7 +24,7 @@ router.post("/api/burgers", (req, res) => {
 
 //PUT to change devoured to true
 router.put("/api/burgers/:id", (req, res) => {
-  var condition = "id = " +  req.params.id;
+  const condition = "id = " +  req.params.id;
   burger.updateOne({ devoured: req.body.devoured },
     condition, result => {
         if(result.changedRows == 0) {
