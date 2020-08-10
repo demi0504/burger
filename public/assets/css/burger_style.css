@@ -21,7 +21,6 @@ body {
 
 .no-bullet {
     background-color: white;
-    outline: grey;
     list-style-type: none;
     text-align: center;
 }
