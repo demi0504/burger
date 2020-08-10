@@ -1,7 +1,7 @@
 $(function() {
-  $(".devour").on("click", function(event) {
-      var id = $(this).data("id");
-      var devoured = {
+  $(".devour").on("click", event => {
+      const id = $(this).data("id");
+      const devoured = {
           devoured: true
       };
 
@@ -13,10 +13,10 @@ $(function() {
     });
   });
 
-  $(".create-burger-form").on("submit", function(event) {
+  $(".create-burger-form").on("submit", event => {
     event.preventDefault();
 
-    var newBurger = {
+    const newBurger = {
       burger_name: $("#createBurger").val().trim(),
       devoured: false
     };
